@@ -63,6 +63,26 @@ Then **start a new Claude session**. A plugin's skills only load when a session 
 | Turn a plugin off | `claude plugin disable <plugin>@<marketplace>` |
 | Remove a plugin | `claude plugin uninstall <plugin>@<marketplace>` |
 
+## When the repo is NOT a plugin (plain skills)
+
+Some repos have no `.claude-plugin` folder, only folders that each contain a
+`SKILL.md` (example: `zbsaygin/econ-skills`). Those are installed by putting
+each skill folder into `~/.claude/skills/`:
+
+```bash
+# 1. Download the repo to a permanent place
+git clone https://github.com/zbsaygin/econ-skills.git ~/.claude/econ-skills
+
+# 2. Link each skill folder into your skills folder (one line per skill)
+ln -s ~/.claude/econ-skills/read-paper ~/.claude/skills/read-paper
+```
+
+Check first that no skill in `~/.claude/skills` already has the same name
+(`ls ~/.claude/skills`). Also read the README: some skills have placeholders
+like `<AUTHOR_NAME>` you must fill in.
+
+To update later: `cd ~/.claude/econ-skills && git pull`
+
 ## Safety
 
 Plugins can run code on your computer. Only install plugins from people or
